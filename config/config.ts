@@ -77,8 +77,8 @@ export default defineConfig({
               component: './ListTableList',
             },
             {
-              name: '空白页面',
-              icon: 'smile',
+              name: '写邮件',
+              icon: 'EditOutlined',
               path: '/ writemails',
               component: './WriteMails',
             },
