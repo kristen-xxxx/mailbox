@@ -6,15 +6,17 @@ import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 
 // export interface StateType {
-//   status?: 'ok' | 'error';
+//   status?: '200' | '404';
 //   type?: string;
-//   currentAuthority?: 'user' | 'guest' | 'admin';
+//   currentAuthority?: 'user' | 'guest' | 'admin'| null ;
 // }
 export interface StateType {
-  Errcode?: '200'|'404'
-  Errmsg?: string;
-  data?: null;
+  errcode?: '200'|'404'
+  errmsg?: string;
+  data?:'user' | 'guest' | 'admin'| null ;
 }
+
+
 
 export interface LoginModelType {
   namespace: string;
@@ -32,7 +34,7 @@ const Model: LoginModelType = {
   namespace: 'login',
 
   state: {
-    Errcode: undefined,
+    errcode: undefined,
   },
 
   effects: {
@@ -44,8 +46,14 @@ const Model: LoginModelType = {
         type: 'changeLoginStatus',
         payload: response,
       });
+      
+      //数据重命名 授权
+      response.currentAuthority=response.data='admin';
+      response.type=response.errmsg;
+
+
       // Login successfully
-      if (response.Errcode === '200') {
+      if (response.errcode === '200') {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params as { redirect: string };
@@ -84,7 +92,7 @@ const Model: LoginModelType = {
       setAuthority(payload.currentAuthority);
       return {
         ...state,
-        status: payload.status,
+        errcode: payload.errcode,
         type: payload.type,
         // Errcode: payload.Errcode,
         // Errmsg: payload.Errmsg,

@@ -7,7 +7,7 @@ function getFakeCaptcha(req: Request, res: Response) {
 export default {
   // 支持值为 Object 和 Array
   'GET /api/currentUser': {
-    name: 'Serati Ma',
+    name: '2017302580201@whu.edu.cn',
     avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
     userid: '00000001',
     email: 'antdesign@alipay.com',
@@ -78,12 +78,13 @@ export default {
     },
   ],
   'POST /api/login/account': (req: Request, res: Response) => {
-    const { password: userPwd, userName: userMail, type } = req.body;
+    const { password: userPwd, userName: userMail, type: errMsg } = req.body;
     if (userPwd === 'hgsz991230' && userMail === '2017302580201@whu.edu.cn') {
       res.send({
-        status: 'ok',
-        type,
-         currentAuthority: 'admin',
+        //status: 'ok',
+        errcode: '200',
+        type: errMsg,
+        currentAuthority: 'admin',
         // status: '200',
         // Errmsg,
         // data: null,
@@ -92,32 +93,35 @@ export default {
     }
     if (userPwd === 'ant.design' && userMail === 'user') {
       res.send({
-        status: 'ok',
-        type,
+        errcode: '200',
+        //status: 'ok',
+        type: errMsg,
         currentAuthority: 'user',
       });
       return;
     }
-    if (type === 'mobile') {
+    if (errMsg === 'mobile') {
       res.send({
-        status: 'ok',
-        type,
+        errcode: '200',
+        //status: 'ok',
+        type: errMsg,
         currentAuthority: 'admin',
       });
       return;
     }
 
     res.send({
-      status: 'error',
-      type,
+      //status: 'error',
+      errcode: '404',
+      type: errMsg,
       currentAuthority: 'guest',
     });
   },
   'POST /api/register': (req: Request, res: Response) => {
-    res.send({ status: 'ok', currentAuthority: 'user' });
+    res.send({ errcode: '200', currentAuthority: 'user' });
   },
   'GET /api/500': (req: Request, res: Response) => {
-    res.status(500).send({
+    res.errcode(500).send({
       timestamp: 1513932555104,
       status: 500,
       error: 'error',
@@ -126,7 +130,7 @@ export default {
     });
   },
   'GET /api/404': (req: Request, res: Response) => {
-    res.status(404).send({
+    res.errcode(404).send({
       timestamp: 1513932643431,
       status: 404,
       error: 'Not Found',
@@ -135,7 +139,7 @@ export default {
     });
   },
   'GET /api/403': (req: Request, res: Response) => {
-    res.status(403).send({
+    res.errcode(403).send({
       timestamp: 1513932555104,
       status: 403,
       error: 'Unauthorized',
@@ -144,7 +148,7 @@ export default {
     });
   },
   'GET /api/401': (req: Request, res: Response) => {
-    res.status(401).send({
+    res.errcode(401).send({
       timestamp: 1513932555104,
       status: 401,
       error: 'Unauthorized',

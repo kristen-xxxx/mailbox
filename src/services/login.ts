@@ -9,8 +9,8 @@ export interface LoginParamsType {
 }
 
 export async function fakeAccountLogin(params: LoginParamsType) {
-  // return request(`http://localhost:8080/pop3/auth`,{
-  return request('/api/login/account', {
+  return request(`http://localhost:8080/pop3/auth`,{
+  //return request('/api/login/account', {
     method: 'POST',
     data: params,
   });

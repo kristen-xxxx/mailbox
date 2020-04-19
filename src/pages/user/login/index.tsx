@@ -1,6 +1,5 @@
 import { Alert } from 'antd';
-import React from 'react';
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { connect, Dispatch } from 'umi';
 import { StateType } from '@/models/login';
 import { LoginParamsType } from '@/services/login';
@@ -9,7 +8,7 @@ import LoginFrom from './components/Login';
 
 import styles from './style.less';
 
-const { Username, Password, Submit } = LoginFrom;
+const { UserName, Password, Submit } = LoginFrom;
 interface LoginProps {
   dispatch: Dispatch;
   userLogin: StateType;
@@ -30,32 +29,27 @@ const LoginMessage: React.FC<{
 );
 
 const Login: React.FC<LoginProps> = (props) => {
-  // const { userLogin = {}, submitting } = props;
-  const { submitting } = props;
-  //const { status } = userLogin;
-  //const [type, setType] = useState<string>('account');
+  const { userLogin = {}, submitting } = props;
+  const { errcode, errmsg: loginType } = userLogin;
+  const [type, setType] = useState<string>('account');
 
-  //登录按钮点击事件
   const handleSubmit = (values: LoginParamsType) => {
     const { dispatch } = props;
     dispatch({
       type: 'login/login',
-      // payload: { ...values, type },
-      payload: { ...values },
+      payload: { ...values, type },
     });
   };
   return (
     <div className={styles.main}>
-      <LoginFrom onSubmit={handleSubmit}>
-      {/* <LoginFrom activeKey={type} onTabChange={setType} onSubmit={handleSubmit}> */}
+      <LoginFrom activeKey={type} onTabChange={setType} onSubmit={handleSubmit}>
         <div>
-          {/* {status === 'error' && loginType === 'account' && !submitting && ( */}
-          {status === 'error' && !submitting && (
+          {status === '404' && loginType === 'account' && !submitting && (
             <LoginMessage content="邮箱账户或密码错误（admin/ant.design）" />
           )}
 
-          <Username
-            name="userMail"
+          <UserName
+            name="userName"
             placeholder="邮箱: admin or user"
             rules={[
               {
@@ -65,7 +59,7 @@ const Login: React.FC<LoginProps> = (props) => {
             ]}
           />
           <Password
-            name="userPwd"
+            name="password"
             placeholder="密码: ant.design"
             rules={[
               {
