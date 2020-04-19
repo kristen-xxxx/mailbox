@@ -78,16 +78,19 @@ export default {
     },
   ],
   'POST /api/login/account': (req: Request, res: Response) => {
-    const { password, userName, type } = req.body;
-    if (password === 'ant.design' && userName === 'admin') {
+    const { password: userPwd, userName: userMail, type } = req.body;
+    if (userPwd === 'hgsz991230' && userMail === '2017302580201@whu.edu.cn') {
       res.send({
-        status: 'ok',
-        type,
-        currentAuthority: 'admin',
+        // status: 'ok',
+        // type,
+        //  currentAuthority: 'admin',
+        Errcode: '200',
+        Errmsg,
+        data: null,
       });
       return;
     }
-    if (password === 'ant.design' && userName === 'user') {
+    if (userPwd === 'ant.design' && userMail === 'user') {
       res.send({
         status: 'ok',
         type,

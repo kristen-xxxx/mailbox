@@ -2,7 +2,7 @@ import { Button, Col, Input, Row, Form, message } from 'antd';
 import React, { useState, useCallback, useEffect } from 'react';
 import omit from 'omit.js';
 import { FormItemProps } from 'antd/es/form/FormItem';
-import { getFakeCaptcha } from '@/services/login';
+//import { getFakeCaptcha } from '@/services/login';
 
 import ItemMap from './map';
 import LoginContext, { LoginContextProps } from './LoginContext';
@@ -11,10 +11,10 @@ import styles from './index.less';
 export type WrappedLoginItemProps = LoginItemProps;
 export type LoginItemKeyType = keyof typeof ItemMap;
 export interface LoginItemType {
-  UserName: React.FC<WrappedLoginItemProps>;
-  Password: React.FC<WrappedLoginItemProps>;
-  Mobile: React.FC<WrappedLoginItemProps>;
-  Captcha: React.FC<WrappedLoginItemProps>;
+  userMail: React.FC<WrappedLoginItemProps>;
+  userPwd: React.FC<WrappedLoginItemProps>;
+  //Mobile: React.FC<WrappedLoginItemProps>;
+  //Captcha: React.FC<WrappedLoginItemProps>;
 }
 
 export interface LoginItemProps extends Partial<FormItemProps> {
@@ -75,14 +75,14 @@ const LoginItem: React.FC<LoginItemProps> = (props) => {
     ...restProps
   } = props;
 
-  const onGetCaptcha = useCallback(async (mobile: string) => {
-    const result = await getFakeCaptcha(mobile);
-    if (result === false) {
-      return;
-    }
-    message.success('获取验证码成功！验证码为：1234');
-    setTiming(true);
-  }, []);
+  // const onGetCaptcha = useCallback(async (mobile: string) => {
+  //   const result = await getFakeCaptcha(mobile);
+  //   if (result === false) {
+  //     return;
+  //   }
+  //   message.success('获取验证码成功！验证码为：1234');
+  //   setTiming(true);
+  // }, []);
 
   useEffect(() => {
     let interval: number = 0;

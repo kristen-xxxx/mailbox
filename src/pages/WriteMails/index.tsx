@@ -28,6 +28,22 @@ export default () => {
           }}
         />
 
+        <Input placeholder="抄送" onChange={e => console.log(e.target.value)} allowClear />
+
+        <div
+          style={{
+            margin: '24px 0',
+          }}
+        />
+
+        <Input placeholder="密送" onChange={e => console.log(e.target.value)} allowClear />
+
+        <div
+          style={{
+            margin: '24px 0',
+          }}
+        />
+
         <Input.TextArea
           placeholder="邮件内容"
           onChange={e => console.log(e.target.value)}

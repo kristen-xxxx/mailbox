@@ -69,7 +69,7 @@ export default defineConfig({
                   authority: ['admin'],
                 },
               ],
-            },
+            }, 
             {
               name: 'list.table-list',
               icon: 'table',
@@ -81,6 +81,12 @@ export default defineConfig({
               icon: 'EditOutlined',
               path: '/ writemails',
               component: './WriteMails',
+            },
+            {
+              name: '收件箱',
+              icon: 'MailOutlined',
+              path: '/inbox',
+              component: './Inbox',
             },
             {
               component: './404',

@@ -5,10 +5,15 @@ import { fakeAccountLogin } from '@/services/login';
 import { setAuthority } from '@/utils/authority';
 import { getPageQuery } from '@/utils/utils';
 
+// export interface StateType {
+//   status?: 'ok' | 'error';
+//   type?: string;
+//   currentAuthority?: 'user' | 'guest' | 'admin';
+// }
 export interface StateType {
-  status?: 'ok' | 'error';
-  type?: string;
-  currentAuthority?: 'user' | 'guest' | 'admin';
+  Errcode?: '200'|'404'
+  Errmsg?: string;
+  data?: null;
 }
 
 export interface LoginModelType {
@@ -27,18 +32,20 @@ const Model: LoginModelType = {
   namespace: 'login',
 
   state: {
-    status: undefined,
+    Errcode: undefined,
   },
 
   effects: {
     *login({ payload }, { call, put }) {
       const response = yield call(fakeAccountLogin, payload);
       yield put({
+        // type: 'changeLoginStatus',
+        // payload: response,
         type: 'changeLoginStatus',
         payload: response,
       });
       // Login successfully
-      if (response.status === 'ok') {
+      if (response.Errcode === '200') {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params as { redirect: string };
@@ -79,6 +86,8 @@ const Model: LoginModelType = {
         ...state,
         status: payload.status,
         type: payload.type,
+        // Errcode: payload.Errcode,
+        // Errmsg: payload.Errmsg,
       };
     },
   },
