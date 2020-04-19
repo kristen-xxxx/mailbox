@@ -6,15 +6,15 @@ import { FormItemProps } from 'antd/es/form/FormItem';
 
 import ItemMap from './map';
 import LoginContext, { LoginContextProps } from './LoginContext';
-import styles from './index.less';
+//import styles from './index.less';
 
 export type WrappedLoginItemProps = LoginItemProps;
 export type LoginItemKeyType = keyof typeof ItemMap;
 export interface LoginItemType {
   userMail: React.FC<WrappedLoginItemProps>;
   userPwd: React.FC<WrappedLoginItemProps>;
-  //Mobile: React.FC<WrappedLoginItemProps>;
-  //Captcha: React.FC<WrappedLoginItemProps>;
+  Mobile: React.FC<WrappedLoginItemProps>;
+  Captcha: React.FC<WrappedLoginItemProps>;
 }
 
 export interface LoginItemProps extends Partial<FormItemProps> {
@@ -122,7 +122,7 @@ const LoginItem: React.FC<LoginItemProps> = (props) => {
               </FormItem>
             </Col>
             <Col span={8}>
-              <Button
+              {/* <Button
                 disabled={timing}
                 className={styles.getCaptcha}
                 size="large"
@@ -132,7 +132,7 @@ const LoginItem: React.FC<LoginItemProps> = (props) => {
                 }}
               >
                 {timing ? `${count} 秒` : '获取验证码'}
-              </Button>
+              </Button> */}
             </Col>
           </Row>
         )}

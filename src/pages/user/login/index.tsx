@@ -9,7 +9,7 @@ import LoginFrom from './components/Login';
 
 import styles from './style.less';
 
-const { UserName, Password, Submit } = LoginFrom;
+const { Username, Password, Submit } = LoginFrom;
 interface LoginProps {
   dispatch: Dispatch;
   userLogin: StateType;
@@ -54,7 +54,7 @@ const Login: React.FC<LoginProps> = (props) => {
             <LoginMessage content="邮箱账户或密码错误（admin/ant.design）" />
           )}
 
-          <UserName
+          <Username
             name="userMail"
             placeholder="邮箱: admin or user"
             rules={[

@@ -81,12 +81,12 @@ export default {
     const { password: userPwd, userName: userMail, type } = req.body;
     if (userPwd === 'hgsz991230' && userMail === '2017302580201@whu.edu.cn') {
       res.send({
-        // status: 'ok',
-        // type,
-        //  currentAuthority: 'admin',
-        Errcode: '200',
-        Errmsg,
-        data: null,
+        status: 'ok',
+        type,
+         currentAuthority: 'admin',
+        // status: '200',
+        // Errmsg,
+        // data: null,
       });
       return;
     }
